@@ -1,0 +1,6 @@
+@FaraOne.Backend_HostAddress = http://localhost:5130
+
+GET {{FaraOne.Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

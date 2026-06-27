@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="FaraOne.Application/FaraOne.Application.csproj" />
+    <Project Path="FaraOne.Domain/FaraOne.Domain.csproj" />
+  </Folder>
+  <Folder Name="/EndPoint/">
+    <Project Path="FaraOne.Backend/FaraOne.Backend.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="FaraOne.Infraustructor/FaraOne.Infraustructor.csproj" />
+    <Project Path="FaraOne.Persistence/FaraOne.Persistence.csproj" />
+  </Folder>
+</Solution>
