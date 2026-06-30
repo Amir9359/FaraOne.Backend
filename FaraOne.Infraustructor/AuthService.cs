@@ -62,18 +62,26 @@ public class AuthService
 
     public async Task<User> Register(string username, string email, string password, string fullName)
     {
-        var user = new User
+        try
         {
-            UserName = username,
-            PhoneNumber = username,
-            Email = email,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
-            Name = fullName, 
-        };
+            var user = new User
+            {
+                UserName = username,
+                PhoneNumber = username,
+                Email = email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
+                Name = fullName,
+            };
 
-        await _dbContext.Users.AddAsync(user);
-        await _dbContext.SaveChangesAsync();
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
 
-        return user;
+            return user;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

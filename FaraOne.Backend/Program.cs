@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
-// TODO  ایجاد دیتابیس و ادامه ساخت ها 
+ 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+    options.MaximumReceiveMessageSize = 102400; // 100 KB
+}); 
 
 builder.Services.AddIdnetityMain(builder.Configuration);
 builder.Services.AddScoped<UserRepository, UserRepository>();
@@ -25,8 +32,7 @@ builder.Services.AddScoped<UserTokenRepository, UserTokenRepository>();
 builder.Services.AddScoped<ITokenValidator, TokenValidator>(); 
  
 
-
-builder.Services.AddSwaggerGen();
+ 
 
 // SignalR
 builder.Services.AddSignalR(options =>
@@ -43,6 +49,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+     
 })
 .AddJwtBearer(options =>
 {
@@ -60,7 +67,8 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 
-    // برای SignalR
+    // برای SignalR 
+
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
@@ -72,7 +80,6 @@ builder.Services.AddAuthentication(options =>
             {
                 context.Token = accessToken;
             }
-
             return Task.CompletedTask;
         }
     };
