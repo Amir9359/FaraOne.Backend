@@ -10,7 +10,7 @@ namespace FaraOne.Backend.Hubs
 {
  
     public class ChatHub : Hub
-    {
+    {  
         private static readonly ConcurrentDictionary<string, string> _userConnections = new();
         private static readonly ConcurrentDictionary<string, List<string>> _roomUsers = new();
         private readonly IDatabaseContext _dbContext;

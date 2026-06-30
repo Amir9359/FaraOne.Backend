@@ -71,7 +71,7 @@ namespace FaraOne.Backend.Controllers
 
             if (room == null)
                 return NotFound(new { error = "تیکت یافت نشد" });
-
+              
             if (request.Status == "open" || request.Status == "in-progress" || request.Status == "closed")
             {
                 if (request.Status == "in-progress")
