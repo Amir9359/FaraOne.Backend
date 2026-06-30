@@ -174,7 +174,7 @@ namespace FaraOne.Backend.Controllers
         {
             try
             {
-                var user = await _authService.Register(request.Email, request.Email, request.Password, request.Password);
+                var user = await _authService.Register(request.Username, request.Email, request.Password, request.Password);
                 var token = _authService.GenerateJwtToken(user);
 
                 return Ok(new
