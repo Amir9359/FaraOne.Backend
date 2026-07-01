@@ -66,6 +66,8 @@ public class ChatController : ControllerBase
     [HttpPost("rooms/create")]
     public async Task<IActionResult> CreateRoom([FromBody] CreateRoomRequest request)
     {
+
+        // TODO کاربر بدون لاگ این برایش چت روم ایجاد نمیشه 
         var userId = GetUserId();
         var roomId = Guid.NewGuid().ToString();
 

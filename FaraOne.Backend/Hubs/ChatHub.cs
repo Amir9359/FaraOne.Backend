@@ -83,6 +83,12 @@ namespace FaraOne.Backend.Hubs
         {
             var userId = GetUserId();
             var username = GetUsername();
+            var isUnAuthorize = false;
+            if (username == "Unknown")
+            {
+                username = Context.ConnectionId;
+                isUnAuthorize = true;
+            }
 
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
 
@@ -133,7 +139,7 @@ namespace FaraOne.Backend.Hubs
             var message = new Message
             {
                 ChatRoomId = roomId,
-                SenderId = userId,
+                SenderId = userId ?? username,
                 SenderName = username,
                 Content = content,
                 MessageType = messageType,
